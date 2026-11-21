@@ -5,9 +5,12 @@ This file tests:
 1. Environment configuration.
 2. State representation.
 3. Space environment generation.
-4. Valid positions and movement.
-5. Movement costs.
-6. Reproducibility.
+4. Boundaries.
+5. Successors.
+6. Movement costs.
+7. Reproducibility.
+8. Starting vertical column.
+9. Guaranteed path.
 """
 
 from config import environment_config
@@ -191,9 +194,7 @@ def test_guaranteed_path():
         current_state = path[i]
         next_state = path[i + 1]
         successors = environment.get_successors(current_state)
-
         successor_states = [successor[0] for successor in successors]
-
         assert next_state in successor_states, (f"Invalid movement: {current_state} -> {next_state}")
 
     print("A complete valid path exists!")
