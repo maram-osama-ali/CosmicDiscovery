@@ -8,7 +8,7 @@ def depth_limited_search(environment, limit):
 
     frontier = [(start_state, 0)]
 
-    # Store the shallowest depth at which each state was reached
+   
     best_depth = {start_state: 0}
 
     parent = {}
@@ -16,14 +16,14 @@ def depth_limited_search(environment, limit):
     generated_nodes = 1
     expanded_nodes = 0
     max_frontier = 1
-
+    explored_states = []
     while frontier:
 
         current_state, depth = frontier.pop()
 
-        # Skip outdated entries
         if depth != best_depth[current_state]:
             continue
+        explored_states.append(current_state)
 
         if environment.is_goal(current_state):
 
@@ -52,7 +52,8 @@ def depth_limited_search(environment, limit):
                 "path_length": len(path) - 1,
                 "generated_nodes": generated_nodes,
                 "expanded_nodes": expanded_nodes,
-                "max_frontier": max_frontier
+                "max_frontier": max_frontier,
+                "explored_states": explored_states
             }
 
         if depth < limit:
@@ -86,7 +87,8 @@ def depth_limited_search(environment, limit):
         "path_length": None,
         "generated_nodes": generated_nodes,
         "expanded_nodes": expanded_nodes,
-        "max_frontier": max_frontier
+        "max_frontier": max_frontier,
+        "explored_states": explored_states
     }
 
 
@@ -103,11 +105,11 @@ def iterative_deepening_search(environment):
     total_generated = 0
     total_expanded = 0
     max_frontier = 0
-
+    all_explored_states = []
     for limit in range(max_depth + 1):
 
         result = depth_limited_search(environment, limit)
-
+        all_explored_states.extend(result["explored_states"])
         total_generated += result["generated_nodes"]
         total_expanded += result["expanded_nodes"]
 
@@ -121,6 +123,7 @@ def iterative_deepening_search(environment):
             result["generated_nodes"] = total_generated
             result["expanded_nodes"] = total_expanded
             result["max_frontier"] = max_frontier
+            result["explored_states"] = all_explored_states
             result["runtime"] = time.perf_counter() - start_time
 
             return result
@@ -134,5 +137,7 @@ def iterative_deepening_search(environment):
         "generated_nodes": total_generated,
         "expanded_nodes": total_expanded,
         "max_frontier": max_frontier,
+        "explored_states": all_explored_states,
+
         "runtime": time.perf_counter() - start_time
     }
