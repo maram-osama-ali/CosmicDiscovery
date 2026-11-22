@@ -227,8 +227,8 @@ python -m tests.test_bfs
 - [x] Environment testing
 - [x] Breadth-First Search implementation
 - [x] BFS testing
-- [ ] Depth-First Search (DFS)
-- [ ] Uniform-Cost Search (UCS)
+- [x] Depth-First Search (DFS)
+- [x] Uniform-Cost Search (UCS)
 - [ ] Iterative Deepening Search (IDS)
 - [ ] Additional search algorithms for Phase II
 - [ ] Performance comparison and visualizations
