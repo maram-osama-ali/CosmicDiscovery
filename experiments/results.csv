@@ -1,0 +1,5 @@
+algorithm,success,path_cost,path_length,generated_nodes,expanded_nodes,max_frontier,runtime
+BFS,True,50,38,1714,1706,96,0.028878299985080957
+DFS,True,572,428,1632,944,879,0.014908399985870346
+UCS,True,43,40,1724,1723,118,0.11782450001919642
+IDS,True,59,38,165635,150985,66,3.0782876999874134
