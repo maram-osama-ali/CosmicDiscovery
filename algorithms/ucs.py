@@ -19,16 +19,18 @@ def uniform_cost_search(environment):
     generated_nodes = 1
     expanded_nodes = 0
     max_frontier = 1
-
+    explored_states = []
     start_time = time.perf_counter()
 
     while frontier:
 
         current_cost, _, current_state = heapq.heappop(frontier)
 
-        # Ignore outdated entries
+       
         if current_cost != best_cost[current_state]:
             continue
+        
+        explored_states.append(current_state)
 
         if environment.is_goal(current_state):
 
@@ -59,6 +61,7 @@ def uniform_cost_search(environment):
                 "generated_nodes": generated_nodes,
                 "expanded_nodes": expanded_nodes,
                 "max_frontier": max_frontier,
+                "explored_states": explored_states,
                 "runtime": end_time - start_time
             }
 
@@ -100,5 +103,6 @@ def uniform_cost_search(environment):
         "generated_nodes": generated_nodes,
         "expanded_nodes": expanded_nodes,
         "max_frontier": max_frontier,
+        "explored_states": explored_states,
         "runtime": end_time - start_time
     }
